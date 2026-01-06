@@ -141,12 +141,12 @@ Constructing `WebPush` validates:
 
 ---
 
-### `webpush.generateRequestDetails(subscription, payload?, options?)`
+### `webpush.generateRequest(subscription, payload?, options?)`
 
 Returns the request parameters to call `fetch()` yourself.
 
 ```ts
-const {endpoint, init} = webpush.generateRequestDetails(subscription, "payload", {
+const {endpoint, init} = webpush.generateRequest(subscription, "payload", {
     TTL: 60,
 });
 
@@ -243,7 +243,7 @@ const webpush = new WebPush({
     },
 });
 
-const {endpoint, init} = webpush.generateRequestDetails(subscription, "ping", {
+const {endpoint, init} = webpush.generateRequest(subscription, "ping", {
     TTL: 120,
     urgency: "high",
 });
