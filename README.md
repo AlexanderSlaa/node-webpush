@@ -55,8 +55,6 @@ that can be sent with Node’s built-in `fetch()`.
 
 ## Installation
 
-> (Adjust package name once published)
-
 ```bash
 npm install node-webpush
 ````
