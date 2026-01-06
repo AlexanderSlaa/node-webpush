@@ -1,7 +1,7 @@
 # Node WebPush (Node.js + TypeScript)
 
-[![npm version](https://img.shields.io/npm/v/@alexanderslaa/node-webpush?logo=npm)](https://www.npmjs.com/package/@alexanderslaa/node-webpush)
-[![License](https://img.shields.io/npm/l/@alexanderslaa/node-webpush)](https://github.com/alexanderslaa/node-webpush/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/node-webpush?logo=npm)](https://www.npmjs.com/package/node-webpush)
+[![License](https://img.shields.io/npm/l/node-webpush)](https://github.com/alexanderslaa/node-webpush/blob/main/LICENSE)
 [![CI](https://github.com/alexanderslaa/node-webpush/actions/workflows/test.yml/badge.svg)](https://github.com/alexanderslaa/node-webpush/actions)
 [![Codecov](https://img.shields.io/codecov/c/github/alexanderslaa/node-webpush)](https://codecov.io/gh/alexanderslaa/node-webpush)
 
