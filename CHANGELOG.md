@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.5...v1.0.6) (2026-01-06)
+
+
+### Bug Fixes
+
+* docs ([d2c4ebc](https://github.com/AlexanderSlaa/node-webpush/commit/d2c4ebc9d185b40913844250aa00a904a715c94d))
+
 ## [1.0.5](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.4...v1.0.5) (2026-01-06)
 
 
