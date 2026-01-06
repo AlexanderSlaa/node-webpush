@@ -1,5 +1,5 @@
 {
-  "name": "webpush",
+  "name": "node-webpush",
   "version": "1.0.0",
   "description": "A dependency-free Web Push implementation for Node.js",
   "main": "./dist/index.es.js",
@@ -22,11 +22,11 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "docs:build": "typedoc src/index.ts --out generated/docs --name \"webpush 🔔\" --theme default --excludePrivate --excludeProtected"
+    "docs:build": "typedoc src/index.ts --out generated/docs --name \"node-webpush 🔔\" --theme default --excludePrivate --excludeProtected"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlexanderSlaa/webpush.git"
+    "url": "git+https://github.com/AlexanderSlaa/node-webpush.git"
   },
   "keywords": [
     "webpush",
@@ -41,9 +41,9 @@
   "license": "Apache-2.0",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/AlexanderSlaa/webpush/issues"
+    "url": "https://github.com/AlexanderSlaa/node-webpush/issues"
   },
-  "homepage": "https://alexanderslaa.github.io/webpush/",
+  "homepage": "https://alexanderslaa.github.io/node-webpush/",
   "publishConfig": {
     "access": "public"
   },
@@ -79,7 +79,7 @@
             "package.json",
             "CHANGELOG.md"
           ],
-          "message": "webpush(release): 🚀 ${nextRelease.version} \n\n${nextRelease.notes}"
+          "message": "node-webpush(release): 🚀 ${nextRelease.version} \n\n${nextRelease.notes}"
         }
       ]
     ]
