@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.2...v1.0.3) (2026-01-06)
+
+
+### Bug Fixes
+
+* remove placeholder ([a60c29f](https://github.com/AlexanderSlaa/node-webpush/commit/a60c29fec8330e00cd9339f8319da746b6841607))
+
 ## [1.0.2](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.1...v1.0.2) (2026-01-06)
 
 
