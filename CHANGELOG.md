@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.3...v1.0.4) (2026-01-06)
+
+
+### Bug Fixes
+
+* readme badges ([6cb40d4](https://github.com/AlexanderSlaa/node-webpush/commit/6cb40d46e52be8293b2db4d416e105e2f16ce582))
+
 ## [1.0.3](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.2...v1.0.3) (2026-01-06)
 
 
