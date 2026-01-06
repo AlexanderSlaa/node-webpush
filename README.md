@@ -58,7 +58,7 @@ that can be sent with Node’s built-in `fetch()`.
 > (Adjust package name once published)
 
 ```bash
-npm install <your-package-name>
+npm install node-webpush
 ````
 
 TypeScript is supported out of the box (the package emits `.d.ts`).
@@ -70,7 +70,7 @@ TypeScript is supported out of the box (the package emits `.d.ts`).
 ### 1) Create a `WebPush` instance
 
 ```ts
-import {WebPush} from "<your-package-name>";
+import {WebPush} from "node-webpush";
 
 const webpush = new WebPush({
     vapid: {
@@ -106,7 +106,7 @@ console.log("Status:", res.status);
 ## Generate VAPID keys
 
 ```ts
-import {VAPID} from "<your-package-name>";
+import {VAPID} from "node-webpush";
 
 const keys = VAPID.GenerateKeys();
 console.log(keys.publicKey);
@@ -235,7 +235,7 @@ await webpush.sendNotification(subscription, "hello", {
 ## Minimal example with manual fetch
 
 ```ts
-import {WebPush} from "<your-package-name>";
+import {WebPush} from "node-webpush";
 
 const webpush = new WebPush({
     vapid: {
@@ -261,7 +261,7 @@ console.log(res.status);
 ## Error handling
 
 ```ts
-import {WebPush, WebPushError} from "<your-package-name>";
+import {WebPush, WebPushError} from "node-webpush";
 
 try {
     await webpush.sendNotification(subscription, "hello");
