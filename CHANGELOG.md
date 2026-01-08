@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.6...v1.1.0) (2026-01-08)
+
+
+### Features
+
+* added option to notify to enable throwing of error on unsuccessful request to push service ([48160d8](https://github.com/AlexanderSlaa/node-webpush/commit/48160d84dea8bb52b9b05a603634bd90cb992134))
+
 ## [1.0.6](https://github.com/AlexanderSlaa/node-webpush/compare/v1.0.5...v1.0.6) (2026-01-06)
 
 
