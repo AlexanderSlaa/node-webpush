@@ -98,9 +98,10 @@ export class WebPush {
         const vapidDetails = options?.vapidDetails === undefined ? this.config.vapid : options.vapidDetails;
 
         const headers: Record<string, string> = {
+            ...extraHeaders,
+            // Keep protocol-critical defaults authoritative even when custom headers are supplied.
             TTL: String(timeToLive),
             Urgency: urgency,
-            ...extraHeaders,
         };
 
         if (topic) headers.Topic = topic;
