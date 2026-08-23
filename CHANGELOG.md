@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/AlexanderSlaa/node-webpush/compare/v1.1.2...v1.2.0) (2026-08-23)
+
+
+### Features
+
+* **webpush:** allow overriding the fetch implementation ([dd64555](https://github.com/AlexanderSlaa/node-webpush/commit/dd64555009b000738568b6f7cf4712c1075e4ec8))
+
 ## [1.1.2](https://github.com/AlexanderSlaa/node-webpush/compare/v1.1.1...v1.1.2) (2026-08-23)
 
 
