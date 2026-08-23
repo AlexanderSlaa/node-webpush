@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/AlexanderSlaa/node-webpush/compare/v1.2.0...v1.2.1) (2026-08-23)
+
+
+### Bug Fixes
+
+* **webpush:** make fetch/response types usable with non-lib.dom fetch implementations ([62be664](https://github.com/AlexanderSlaa/node-webpush/commit/62be6648228fa44ec722e949f43bd1876d6b27f1))
+
 # [1.2.0](https://github.com/AlexanderSlaa/node-webpush/compare/v1.1.2...v1.2.0) (2026-08-23)
 
 
