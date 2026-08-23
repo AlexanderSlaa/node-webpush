@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/AlexanderSlaa/node-webpush/compare/v1.1.1...v1.1.2) (2026-08-23)
+
+
+### Bug Fixes
+
+* **ci:** drop Node 18 from test matrix, require Node >=20 ([2910d85](https://github.com/AlexanderSlaa/node-webpush/commit/2910d852d975daa453a9aecd7141c75de1c3a4b2))
+* **webpush:** remove non-compliant legacy aesgcm encoding ([bc73eb3](https://github.com/AlexanderSlaa/node-webpush/commit/bc73eb30554cda5b570bcbb80744d7731a595e9c))
+
 ## [1.1.1](https://github.com/AlexanderSlaa/node-webpush/compare/v1.1.0...v1.1.1) (2026-03-06)
 
 
