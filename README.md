@@ -129,6 +129,7 @@ type WebPushConfig = {
         subject: string | URL; // must be https: or mailto:
     };
     gcm?: { apiKey?: string | null };
+    fetch?: typeof fetch; // override the fetch notify() uses; defaults to global fetch
 };
 ```
 
@@ -137,6 +138,22 @@ Constructing `WebPush` validates:
 * VAPID subject format (`https:` or `mailto:`)
 * VAPID key sizes and base64url encoding
 * GCM/FCM key if provided (must be non-empty)
+* `fetch` if provided (must be a function)
+
+By default, `notify()` sends the request with the global `fetch`. Override it — for a
+runtime without one, or to plug in retries/logging/a proxying fetch — via `config.fetch`
+(applies to every call) or `options.fetch` on an individual `notify()` call (takes
+precedence over `config.fetch`):
+
+```ts
+const webpush = new WebPush({
+    vapid: {/* ... */},
+    fetch: myInstrumentedFetch, // used by every notify() call unless overridden below
+});
+
+// One-off override for a single call:
+await webpush.notify(subscription, "hello", {fetch: myInstrumentedFetch});
+```
 
 ---
 

@@ -21,6 +21,13 @@ export type WebPushConfig = {
     gcm?: {
         apiKey?: string | null;
     };
+
+    /**
+     * Override for the `fetch` implementation `notify()` uses to send the request.
+     * Defaults to the global `fetch`. Useful in runtimes without one, or to plug in
+     * a wrapped/instrumented fetch (retries, logging, proxying, etc.).
+     */
+    fetch?: typeof fetch;
 };
 
 export type GenerateRequestOptions = {

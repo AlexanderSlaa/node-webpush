@@ -57,6 +57,10 @@ export class WebPush {
         if (config.gcm?.apiKey != null && config.gcm.apiKey.length === 0) {
             throw new Error('The GCM/FCM API Key should be a non-empty string, null, or undefined.');
         }
+
+        if (config.fetch != null && typeof config.fetch !== 'function') {
+            throw new Error('config.fetch must be a function.');
+        }
     }
 
     /**
@@ -179,10 +183,11 @@ export class WebPush {
     async notify(
         subscription: PushSubscription,
         payload?: string | Buffer | Uint8Array | null,
-        options?: GenerateRequestOptions & { throwOnInvalidResponse?: boolean },
+        options?: GenerateRequestOptions & { throwOnInvalidResponse?: boolean; fetch?: typeof fetch },
     ): Promise<Response> {
         const {endpoint, init} = this.generateRequest(subscription, payload, options);
-        const res = await fetch(endpoint, init);
+        const fetchImpl = options?.fetch ?? this.config.fetch ?? fetch;
+        const res = await fetchImpl(endpoint, init);
         if (!res.ok && options?.throwOnInvalidResponse) throw new WebPushError('Received unexpected response code', res);
         return res;
     }

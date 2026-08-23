@@ -229,3 +229,61 @@ describe("WebPush.generateRequest", () => {
         expect(headers["Authorization"]).toBe("key=my-fcm-key");
     });
 });
+
+describe("WebPush.notify fetch override", () => {
+    it("uses the per-call fetch override instead of global fetch", async () => {
+        const wp = makeWebPush();
+        const sub = makeValidSubscription("https://example.com/push");
+
+        let calledWith: [string | URL, RequestInit | undefined] | undefined;
+        const fakeFetch = async (input: string | URL, init?: RequestInit) => {
+            calledWith = [input, init];
+            return new Response(null, {status: 201});
+        };
+
+        const res = await wp.notify(sub, "hello", {fetch: fakeFetch as typeof fetch});
+
+        expect(res.status).toBe(201);
+        expect(calledWith?.[0]).toBe(sub.endpoint);
+    });
+
+    it("uses the config-level fetch override when no per-call override is given", async () => {
+        let called = false;
+        const fakeFetch = async () => {
+            called = true;
+            return new Response(null, {status: 201});
+        };
+
+        const vapidKeys = VAPID.GenerateKeys();
+        const wp = new WebPush({
+            vapid: {
+                subject: "mailto:test@example.com",
+                publicKey: vapidKeys.publicKey,
+                privateKey: vapidKeys.privateKey,
+            },
+            fetch: fakeFetch as typeof fetch,
+        });
+        const sub = makeValidSubscription("https://example.com/push");
+
+        const res = await wp.notify(sub, "hello");
+
+        expect(called).toBe(true);
+        expect(res.status).toBe(201);
+    });
+
+    it("rejects a non-function config.fetch in the constructor", () => {
+        const vapidKeys = VAPID.GenerateKeys();
+
+        expect(
+            () =>
+                new WebPush({
+                    vapid: {
+                        subject: "mailto:test@example.com",
+                        publicKey: vapidKeys.publicKey,
+                        privateKey: vapidKeys.privateKey,
+                    },
+                    fetch: "not-a-function" as unknown as typeof fetch,
+                })
+        ).toThrow(/config\.fetch must be a function/i);
+    });
+});
