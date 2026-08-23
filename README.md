@@ -293,7 +293,7 @@ try {
 
 ## Runtime requirements
 
-* Node.js with global `fetch` (Node 18+ recommended).
+* Node.js 20+ (with global `fetch`).
 * TypeScript `target: ES2020` works.
 
 ---

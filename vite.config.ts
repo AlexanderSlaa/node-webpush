@@ -14,7 +14,7 @@ export default defineConfig({
             external: ["crypto"],
         },
         sourcemap: true,
-        target: 'node24'
+        target: 'node20'
     },
     plugins: [dts()]
 });

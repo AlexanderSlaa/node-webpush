@@ -40,6 +40,9 @@
   "author": "Alexander Slaa",
   "license": "Apache-2.0",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "bugs": {
     "url": "https://github.com/sourceregistry/node-webpush/issues"
   },
