@@ -8,6 +8,9 @@ import {
     SupportedUrgency,
 } from './constants';
 import type {
+    FetchLike,
+    FetchLikeInit,
+    FetchLikeResponse,
     GenerateRequestOptions,
     PushSubscription,
     WebPushConfig,
@@ -18,7 +21,7 @@ import {encryptAes128GcmBody} from './crypto/webpush-encryption';
 import {GenerateHeaders, Validate} from "./vapid";
 
 export class WebPushError extends Error {
-    constructor(message: string, public readonly response: Response) {
+    constructor(message: string, public readonly response: FetchLikeResponse) {
         super(message);
     }
 }
@@ -47,6 +50,16 @@ function assertSupportedEncoding(e: SupportedContentEncoding): void {
 function assertSupportedUrgency(u: SupportedUrgency): void {
     if (!Object.values(SupportedUrgency).includes(u)) throw new Error(`Unsupported urgency: ${u}`);
 }
+
+// Adapts the real global `fetch` to FetchLike. Note the direction that actually needs a cast:
+// `typeof fetch` accepts everything FetchLike ever sends it (a real superset), so passing global
+// `fetch` *as a value* wherever a FetchLike is expected needs none - but the *type* `typeof fetch`
+// isn't structurally assignable to the *type* `FetchLike`, purely because their `init.body` union
+// members (Buffer vs. lib.dom's BodyInit) don't line up in the generic-`Uint8Array` TS/Node
+// versions this project builds against, not because of any real runtime incompatibility (a Buffer
+// is genuinely a valid body for native fetch). One boundary adapter here beats forcing every
+// FetchLike-typed value throughout this file to carry that same cast.
+const defaultFetch: FetchLike = (input, init) => fetch(input, init as RequestInit);
 
 export class WebPush {
     constructor(public readonly config: WebPushConfig) {
@@ -165,10 +178,10 @@ export class WebPush {
             headers.Authorization = `key=${currentGcmKey}`;
         }
 
-        const init: RequestInit = {
+        const init: FetchLikeInit = {
             method: 'POST',
             headers,
-            body: body as any,
+            body,
         };
 
         return {endpoint, init};
@@ -183,10 +196,10 @@ export class WebPush {
     async notify(
         subscription: PushSubscription,
         payload?: string | Buffer | Uint8Array | null,
-        options?: GenerateRequestOptions & { throwOnInvalidResponse?: boolean; fetch?: typeof fetch },
-    ): Promise<Response> {
+        options?: GenerateRequestOptions & { throwOnInvalidResponse?: boolean; fetch?: FetchLike },
+    ): Promise<FetchLikeResponse> {
         const {endpoint, init} = this.generateRequest(subscription, payload, options);
-        const fetchImpl = options?.fetch ?? this.config.fetch ?? fetch;
+        const fetchImpl: FetchLike = options?.fetch ?? this.config.fetch ?? defaultFetch;
         const res = await fetchImpl(endpoint, init);
         if (!res.ok && options?.throwOnInvalidResponse) throw new WebPushError('Received unexpected response code', res);
         return res;
