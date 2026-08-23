@@ -86,21 +86,6 @@ describe("VAPID", () => {
         // For aes128gcm, no Crypto-Key header is required from VAPID
         expect(h.get("Crypto-Key")).toBeNull();
     });
-
-    it("GenerateHeaders returns correct header format for aesgcm", () => {
-        const { publicKey, privateKey } = VAPID.GenerateKeys();
-
-        const h = VAPID.GenerateHeaders({
-            audience: "https://example.com",
-            subject: "mailto:test@example.com",
-            publicKey,
-            privateKey,
-            contentEncoding: SupportedContentEncoding.AES_GCM,
-        });
-
-        expect(h.get("Authorization")?.startsWith("WebPush ")).toBe(true);
-        expect(h.get("Crypto-Key")?.startsWith("p256ecdsa=")).toBe(true);
-    });
 });
 
 describe("WebPush.generateRequest", () => {

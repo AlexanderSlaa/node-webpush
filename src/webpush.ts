@@ -14,7 +14,7 @@ import type {
     WebPushRequestDetails,
 } from './types';
 import {base64url} from './utils/base64url';
-import {encryptAes128GcmBody, encryptAesGcmLegacy} from './crypto/webpush-encryption';
+import {encryptAes128GcmBody} from './crypto/webpush-encryption';
 import {GenerateHeaders, Validate} from "./vapid";
 
 export class WebPushError extends Error {
@@ -121,32 +121,18 @@ export class WebPush {
 
             headers['Content-Type'] = 'application/octet-stream';
 
-            if (contentEncoding === SupportedContentEncoding.AES_128_GCM) {
-                const encBody = encryptAes128GcmBody({
-                    p256dh: subscription.keys.p256dh,
-                    auth: subscription.keys.auth,
-                    payload: payloadBuf,
-                    rs,
-                    allowMultipleRecords,
-                    finalRecordPadding,
-                });
+            const encBody = encryptAes128GcmBody({
+                p256dh: subscription.keys.p256dh,
+                auth: subscription.keys.auth,
+                payload: payloadBuf,
+                rs,
+                allowMultipleRecords,
+                finalRecordPadding,
+            });
 
-                body = encBody;
-                headers['Content-Encoding'] = SupportedContentEncoding.AES_128_GCM;
-                headers['Content-Length'] = String(encBody.length);
-            } else {
-                const enc = encryptAesGcmLegacy({
-                    p256dh: subscription.keys.p256dh,
-                    auth: subscription.keys.auth,
-                    payload: payloadBuf,
-                });
-
-                body = enc.ciphertext;
-                headers['Content-Encoding'] = SupportedContentEncoding.AES_GCM;
-                headers['Content-Length'] = String(enc.ciphertext.length);
-                headers['Encryption'] = `salt=${enc.saltB64Url}`;
-                headers['Crypto-Key'] = `dh=${base64url.toString(enc.localPublicKey)}`;
-            }
+            body = encBody;
+            headers['Content-Encoding'] = SupportedContentEncoding.AES_128_GCM;
+            headers['Content-Length'] = String(encBody.length);
         } else {
             headers['Content-Length'] = '0';
         }
@@ -171,11 +157,6 @@ export class WebPush {
 
             const auth = vapidHeaders.get('Authorization');
             if (auth) headers.Authorization = auth;
-
-            const ck = vapidHeaders.get('Crypto-Key');
-            if (ck && contentEncoding === SupportedContentEncoding.AES_GCM) {
-                headers['Crypto-Key'] = headers['Crypto-Key'] ? `${headers['Crypto-Key']}; ${ck}` : ck;
-            }
         } else if (fcm && currentGcmKey) {
             headers.Authorization = `key=${currentGcmKey}`;
         }

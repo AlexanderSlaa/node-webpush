@@ -34,7 +34,7 @@ export type GenerateRequestOptions = {
     topic?: string;
 
     /**
-     * RFC8188 compliance knob:
+     * RFC8188 compliance knob (aes128gcm only):
      * - Web Push RFC8291 requires a single record; this stays `false` by default.
      * - Set to `true` only if you intentionally want multi-record RFC8188 payload bodies.
      */

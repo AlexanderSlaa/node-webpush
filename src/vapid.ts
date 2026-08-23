@@ -160,14 +160,10 @@ export function GenerateHeaders(input: {
     const jwt = signJwtES256({aud: audience, exp, sub: subject}, input.privateKey, input.publicKey);
 
     const headers = new Headers();
-    if (input.contentEncoding === SupportedContentEncoding.AES_128_GCM) {
-        headers.set('Authorization', `vapid t=${jwt}, k=${input.publicKey}`);
-    } else if (input.contentEncoding === SupportedContentEncoding.AES_GCM) {
-        headers.set('Authorization', `WebPush ${jwt}`);
-        headers.set('Crypto-Key', `p256ecdsa=${input.publicKey}`);
-    } else {
+    if (input.contentEncoding !== SupportedContentEncoding.AES_128_GCM) {
         throw new Error(`Unsupported content encoding: ${input.contentEncoding}`);
     }
+    headers.set('Authorization', `vapid t=${jwt}, k=${input.publicKey}`);
     return headers;
 }
 

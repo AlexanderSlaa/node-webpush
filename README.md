@@ -1,9 +1,9 @@
 # Node WebPush (Node.js + TypeScript)
 
 [![npm version](https://img.shields.io/npm/v/node-webpush?logo=npm)](https://www.npmjs.com/package/node-webpush)
-[![License](https://img.shields.io/npm/l/node-webpush)](https://github.com/alexanderslaa/node-webpush/blob/main/LICENSE)
-[![CI](https://github.com/alexanderslaa/node-webpush/actions/workflows/test.yml/badge.svg)](https://github.com/alexanderslaa/node-webpush/actions)
-[![Codecov](https://img.shields.io/codecov/c/github/alexanderslaa/node-webpush)](https://codecov.io/gh/alexanderslaa/node-webpush)
+[![License](https://img.shields.io/npm/l/node-webpush)](https://github.com/sourceregistry/node-webpush/blob/main/LICENSE)
+[![CI](https://github.com/sourceregistry/node-webpush/actions/workflows/test.yml/badge.svg)](https://github.com/sourceregistry/node-webpush/actions)
+[![Codecov](https://img.shields.io/codecov/c/github/sourceregistry/node-webpush)](https://codecov.io/gh/sourceregistry/node-webpush)
 
 A dependency-free Web Push implementation for Node.js (TypeScript-first).
 
@@ -17,9 +17,8 @@ that can be sent with Node’s built-in `fetch()`.
 - **RFC 8188**: HTTP Encrypted Content Encoding (record-based framing, per-record nonce derivation).
 - **RFC 8291**: Web Push message encryption (ECDH + auth secret, “WebPush: info” key schedule, `aes128gcm`).
 - **RFC 8292**: VAPID (JWT ES256) authentication headers.
-- Supports both encodings:
-    - **`aes128gcm` (recommended)**: modern Web Push encoding (RFC 8291 + RFC 8188).
-    - **`aesgcm` (legacy)**: kept for interoperability with older endpoints.
+- Encodes payloads with **`aes128gcm`** (RFC 8291 + RFC 8188) — the only encoding modern browsers accept.
+  The legacy `aesgcm` draft encoding is not supported; all current push services and browsers use `aes128gcm`.
 
 ### 🔐 Encryption
 
@@ -201,7 +200,7 @@ type GenerateRequestOptions = {
     urgency?: "very-low" | "low" | "normal" | "high";
     topic?: string; // base64url <= 32 chars
 
-    contentEncoding?: "aes128gcm" | "aesgcm";
+    contentEncoding?: "aes128gcm";
 
     // RFC8188 knobs (primarily for advanced use/testing)
     rs?: number; // default 4096, must be >= 18
@@ -216,7 +215,7 @@ type GenerateRequestOptions = {
 
 ### Notes
 
-* **`aes128gcm` is recommended** for Web Push.
+* Payloads are always encrypted with `aes128gcm` (RFC 8291 + RFC 8188).
 * For Web Push interoperability, leave `allowMultipleRecords` at `false` (default).
 * `topic` must use URL-safe base64 characters and be <= 32 chars.
 

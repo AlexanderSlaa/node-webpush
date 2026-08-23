@@ -1,7 +1,6 @@
 'use strict';
 
 export enum SupportedContentEncoding {
-    AES_GCM = 'aesgcm',
     AES_128_GCM = 'aes128gcm',
 }
 

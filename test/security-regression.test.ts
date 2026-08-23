@@ -79,19 +79,6 @@ describe("Negative and security regression cases", () => {
         expect(headers["Authorization"]).toBeUndefined();
     });
 
-    it("preserves encryption key and appends VAPID key in legacy aesgcm mode", () => {
-        const wp = makeWebPush();
-        const sub = makeValidSubscription("https://example.com/push");
-
-        const { init } = wp.generateRequest(sub, "hello", {
-            contentEncoding: SupportedContentEncoding.AES_GCM,
-        });
-
-        const headers = init.headers as Record<string, string>;
-        expect(headers["Crypto-Key"]).toContain("dh=");
-        expect(headers["Crypto-Key"]).toContain("p256ecdsa=");
-    });
-
     it("rejects invalid endpoint URLs when VAPID audience cannot be derived", () => {
         const wp = makeWebPush();
         const sub = makeValidSubscription("not-a-url");
