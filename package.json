@@ -41,9 +41,9 @@
   "license": "Apache-2.0",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/AlexanderSlaa/node-webpush/issues"
+    "url": "https://github.com/sourceregistry/node-webpush/issues"
   },
-  "homepage": "https://alexanderslaa.github.io/node-webpush/",
+  "homepage": "https://sourceregistry.github.io/node-webpush/",
   "publishConfig": {
     "access": "public"
   },
@@ -52,16 +52,16 @@
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^13.1.5",
-    "@semantic-release/release-notes-generator": "^14.1.0",
-    "@types/node": "^25.3.5",
-    "@vitest/coverage-v8": "^4.0.18",
-    "@vitest/ui": "^4.0.18",
-    "tsx": "^4.20.4",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.18",
-    "typedoc": "^0.28.17"
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@types/node": "^26.2.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "@vitest/ui": "^4.1.11",
+    "tsx": "^4.23.12",
+    "typedoc": "^0.28.20",
+    "typescript": "^6.0.3",
+    "vite": "^8.2.2",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^4.1.11"
   },
   "release": {
     "branches": [
